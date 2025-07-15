@@ -5,6 +5,7 @@ import {
     Button,
     Card,
     CardBody,
+    CardTitle,
     Form,
     Input,
     Label,
@@ -51,10 +52,12 @@ const LoginForm = () => {
     };
 
     return (
-        <div className='sign-up-form container col-md-6 col-lg-5 col-xl-4 mx-auto'>
-            <h1 className='mt-4'>Log In</h1>
+        <div className='form-container container col-md-6 col-lg-5 col-xl-4 mx-auto'>
             <Card>
                 <CardBody>
+                    <CardTitle tag="h3">
+                        Log In
+                    </CardTitle>
                     <Form onSubmit={handleSubmit}>
                         {inputs.map(input => (
                             <div className='mb-3' key={input}>
