@@ -1,0 +1,10 @@
+.MemoLedger {
+    background-color: var(--main-bg-color);
+    background-image: radial-gradient(var(--secondary-bg-color) 0.5px, transparent 0.5px);
+    background-size: 20px 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: black;
+    padding-top: 3.5rem;
+}
