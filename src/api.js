@@ -95,8 +95,10 @@ class MemoLedgerApi {
         let res = await this.request(
             `users/${username}`,
             {},
-            method = "delete"
+            "delete"
         );
         return res.user;
     }
 }
+
+export default MemoLedgerApi;
