@@ -8,6 +8,8 @@
     color: black;
 }
 
+
+/* +++++++++++++  Loading Component  +++++++++++++  */
 .loading-container {
     display: flex;
     justify-content: center;
@@ -20,6 +22,20 @@
     background-size: 20px 20px;
     color: var(--tertiary-bg-color);
 }
+
+
+/* +++++++++++++  Homepage Component  +++++++++++++  */
+.homepage {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+.homepage h1 {
+    margin-top: 2rem;
+}
+
+
+/* +++++++++++++  Form Components  +++++++++++++  */
 
 .form-container {
     margin-top: 4rem;
