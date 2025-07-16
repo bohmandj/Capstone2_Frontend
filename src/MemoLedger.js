@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import MemoLedgerApi from "./api";
+import NavBar from './NavBar';
 import MemoLedgerContext from "./MemoLedgerContext";
 import Loading from './Loading';
 import MemoLedgerRoutes from "./MemoLedgerRoutes";
@@ -10,7 +11,7 @@ const MemoLedger = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [token, setToken] = useState(false);
     const [currentUser, setCurrentUser] = useState(false);
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const loadUser = async () => {
@@ -42,13 +43,27 @@ const MemoLedger = () => {
         setToken(tokenStr);
     }
 
+    const login = async (loginFormData) => {
+        setIsLoading(true);
+        const {
+            username,
+            password
+        } = loginFormData;
+        const returnedToken = await MemoLedgerApi.loginUser(username, password);
+        localStorage.setItem("token", returnedToken);
+        await applyToken(returnedToken);
+        setIsLoading(false);
+        navigate('/');
+    }
+
     if (isLoading) {
         return <Loading />;
     }
 
     return (
         <div className="MemoLedger">
-            <MemoLedgerContext.Provider value={{}}>
+            <MemoLedgerContext.Provider value={{ currentUser, login }}>
+                <NavBar />
                 <MemoLedgerRoutes />
             </MemoLedgerContext.Provider>
         </div>
