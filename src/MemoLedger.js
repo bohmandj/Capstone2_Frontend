@@ -56,13 +56,20 @@ const MemoLedger = () => {
         navigate('/');
     }
 
+    const logout = () => {
+        localStorage.removeItem("token");
+        setToken(false);
+        setCurrentUser(false);
+        navigate('/');
+    }
+
     if (isLoading) {
         return <Loading />;
     }
 
     return (
         <div className="MemoLedger">
-            <MemoLedgerContext.Provider value={{ currentUser, login }}>
+            <MemoLedgerContext.Provider value={{ currentUser, login, logout }}>
                 <NavBar />
                 <MemoLedgerRoutes />
             </MemoLedgerContext.Provider>
