@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import MemoLedgerContext from "./MemoLedgerContext";
 import { NavLink } from "react-router-dom";
 import {
@@ -14,14 +14,35 @@ const NavBar = () => {
 
     const { currentUser, logout } = useContext(MemoLedgerContext);
     const [isOpen, setIsOpen] = useState(false);
+    const navRef = useRef();
 
     const toggle = () => setIsOpen(!isOpen);
+
+    // Close nav link dropdown (for narrow screens) when open & on click outside
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (navRef.current && !navRef.current.contains(event.target)) {
+                setIsOpen(false);
+            }
+        };
+
+        if (isOpen) {
+            document.addEventListener("mousedown", handleClickOutside);
+        } else {
+            document.removeEventListener("mousedown", handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [isOpen]);
 
     return (
         <Navbar
             expand="md"
             fixed="top"
             className="navbar-custom"
+            ref={navRef}
         >
             <NavbarBrand tag={NavLink} to="/">
                 MemoLedger
