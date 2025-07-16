@@ -52,7 +52,7 @@ const LoginForm = () => {
     };
 
     return (
-        <div className='form-container container col-md-6 col-lg-5 col-xl-4 mx-auto'>
+        <div className='page-content form-container container col-11 col-md-6 col-lg-5 col-xl-4 mx-auto my-auto'>
             <Card>
                 <CardBody>
                     <CardTitle tag="h3">
