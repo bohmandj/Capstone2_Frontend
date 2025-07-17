@@ -63,13 +63,27 @@ const MemoLedger = () => {
         navigate('/');
     }
 
+    const register = async (registrationFormData) => {
+        setIsLoading(true);
+        const {
+            username,
+            password,
+            email
+        } = registrationFormData;
+        const returnedToken = await MemoLedgerApi.registerUser(username, password, email);
+        localStorage.setItem("token", returnedToken);
+        await applyToken(returnedToken);
+        setIsLoading(false);
+        navigate('/');
+    }
+
     if (isLoading) {
         return <Loading />;
     }
 
     return (
         <div className="MemoLedger">
-            <MemoLedgerContext.Provider value={{ currentUser, login, logout }}>
+            <MemoLedgerContext.Provider value={{ currentUser, login, logout, register }}>
                 <NavBar />
                 <MemoLedgerRoutes />
             </MemoLedgerContext.Provider>
