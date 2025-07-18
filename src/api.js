@@ -35,6 +35,8 @@ class MemoLedgerApi {
 
     // Individual API routes
 
+    //////////////////// User Routes ////////////////////
+
     /** Get user data from username.
      * Returns { userId, username, email, is_admin, notes }
      *   where notes is [{userId, title, noteBody, createdAt, editedAt, tags}},...]
@@ -98,6 +100,20 @@ class MemoLedgerApi {
             "delete"
         );
         return res;
+    }
+
+    //////////////////// Note Routes ////////////////////
+
+    /** Get note data from noteId.
+     * Returns {userId, title, noteBody, createdAt, editedAt, tags}
+     *          where tags is [tagName,...]
+     */
+
+    static async getNote(noteId) {
+        let res = await this.request(
+            `notes/${noteId}`
+        );
+        return res.note;
     }
 }
 
