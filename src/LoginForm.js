@@ -8,8 +8,7 @@ import {
     CardTitle,
     Form,
     Input,
-    Label,
-    Nav
+    Label
 } from "reactstrap";
 
 const LoginForm = () => {
