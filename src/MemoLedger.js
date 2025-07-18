@@ -77,13 +77,28 @@ const MemoLedger = () => {
         navigate('/');
     }
 
+    const updateUser = async (profileFormData) => {
+        setIsLoading(true);
+        const {
+            password,
+            email
+        } = profileFormData;
+        const returnedUser = await MemoLedgerApi.updateUser(currentUser.username, password, email);
+        setCurrentUser({
+            ...currentUser,
+            email: returnedUser.email
+        });
+        setIsLoading(false);
+        navigate('/');
+    }
+
     if (isLoading) {
         return <Loading />;
     }
 
     return (
         <div className="MemoLedger">
-            <MemoLedgerContext.Provider value={{ currentUser, login, logout, register }}>
+            <MemoLedgerContext.Provider value={{ currentUser, login, logout, register, updateUser }}>
                 <NavBar />
                 <MemoLedgerRoutes />
             </MemoLedgerContext.Provider>
