@@ -14,12 +14,16 @@ import ProfileForm from './ProfileForm';
 const Profile = () => {
     /* Profile form to update user data */
 
-    const { currentUser } = useContext(MemoLedgerContext);
+    const { currentUser, deleteUser } = useContext(MemoLedgerContext);
 
     const [showProfileForm, setShowProfileForm] = useState(false);
 
     if (!currentUser) {
         return <Navigate to={'/'} />
+    }
+
+    const deletionWarning = () => {
+        if (window.confirm("Are you sure you want to delete your profile?\nThis action can not be undone.")) deleteUser(currentUser.username);
     }
 
     const showProfileData = <>
@@ -35,6 +39,7 @@ const Profile = () => {
             </ListGroupItem>
         </ListGroup>
         <Button className='w-100' onClick={() => setShowProfileForm(true)}>Edit Profile</Button>
+        <Button className='w-100 mt-2' color="danger" onClick={() => deletionWarning()} >Delete Profile</Button>
     </>
 
     return (

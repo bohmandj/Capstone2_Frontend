@@ -97,7 +97,7 @@ class MemoLedgerApi {
             {},
             "delete"
         );
-        return res.user;
+        return res;
     }
 }
 
