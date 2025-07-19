@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import MemoLedgerContext from './MemoLedgerContext';
+import MemoLedgerApi from './api';
 import {
     Button,
     Card,
@@ -14,12 +15,25 @@ import ProfileForm from './ProfileForm';
 const Profile = () => {
     /* Profile form to update user data */
 
-    const { currentUser, deleteUser } = useContext(MemoLedgerContext);
+    const { currentUser, setIsLoading, logout } = useContext(MemoLedgerContext);
+    const navigate = useNavigate();
 
     const [showProfileForm, setShowProfileForm] = useState(false);
 
     if (!currentUser) {
         return <Navigate to={'/'} />
+    }
+
+    const deleteUser = async () => {
+        setIsLoading(true);
+        const res = await MemoLedgerApi.deleteUser(currentUser.username);
+        if (res.deleted) {
+            logout();
+        } else {
+            alert("Error occurred during profile deletion. Please try again.")
+        }
+        setIsLoading(false);
+        navigate('/');
     }
 
     const deletionWarning = () => {
