@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import MemoLedgerContext from './MemoLedgerContext';
+import MemoLedgerApi from './api';
 import {
     Button,
     CardTitle,
@@ -14,7 +15,8 @@ import {
 const ProfileForm = ({ setShowProfileForm }) => {
     /* Profile form to update user data */
 
-    const { currentUser, updateUser } = useContext(MemoLedgerContext);
+    const { currentUser, setCurrentUser, setIsLoading } = useContext(MemoLedgerContext);
+    const navigate = useNavigate();
 
     const ERRORS_INITIAL_STATE = {
         invalidEmail: false,
@@ -42,6 +44,21 @@ const ProfileForm = ({ setShowProfileForm }) => {
 
     if (!currentUser) {
         return <Navigate to={'/'} />
+    }
+
+    const updateUser = async (profileFormData) => {
+        setIsLoading(true);
+        const {
+            password,
+            email
+        } = profileFormData;
+        const returnedUser = await MemoLedgerApi.updateUser(currentUser.username, password, email);
+        setCurrentUser({
+            ...currentUser,
+            email: returnedUser.email
+        });
+        setIsLoading(false);
+        navigate('/');
     }
 
     const validateEmail = (email) => {

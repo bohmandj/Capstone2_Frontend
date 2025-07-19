@@ -77,40 +77,13 @@ const MemoLedger = () => {
         navigate('/');
     }
 
-    const updateUser = async (profileFormData) => {
-        setIsLoading(true);
-        const {
-            password,
-            email
-        } = profileFormData;
-        const returnedUser = await MemoLedgerApi.updateUser(currentUser.username, password, email);
-        setCurrentUser({
-            ...currentUser,
-            email: returnedUser.email
-        });
-        setIsLoading(false);
-        navigate('/');
-    }
-
-    const deleteUser = async () => {
-        setIsLoading(true);
-        const res = await MemoLedgerApi.deleteUser(currentUser.username);
-        if (res.deleted) {
-            logout();
-        } else {
-            alert("Error occurred during profile deletion. Please try again.")
-        }
-        setIsLoading(false);
-        navigate('/');
-    }
-
     if (isLoading) {
         return <Loading />;
     }
 
     return (
         <div className="MemoLedger">
-            <MemoLedgerContext.Provider value={{ currentUser, login, logout, register, updateUser, deleteUser }}>
+            <MemoLedgerContext.Provider value={{ setIsLoading, currentUser, setCurrentUser, login, logout, register }}>
                 <NavBar />
                 <MemoLedgerRoutes />
             </MemoLedgerContext.Provider>
