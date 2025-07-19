@@ -115,6 +115,20 @@ class MemoLedgerApi {
         );
         return res.note;
     }
+
+    /** Update an existing note, 
+     * Returns {userId, title, noteBody, createdAt, editedAt, tags}
+     *          where tags is [tagName,...]
+     */
+
+    static async updateNote(noteId, title, noteBody) {
+        let res = await this.request(
+            `notes/${noteId}`,
+            { title, noteBody },
+            "patch"
+        );
+        return res.note;
+    }
 }
 
 export default MemoLedgerApi;

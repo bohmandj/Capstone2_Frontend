@@ -71,7 +71,7 @@ const Note = ({ deleteNote }) => {
         <CardSubtitle className='mb-3 text-muted'>
             <small>Last Edited {formatTimestamp(note.editedAt)}</small>
         </CardSubtitle>
-        <CardText>
+        <CardText style={{ whiteSpace: 'pre-wrap' }}>
             {note.noteBody}
         </CardText>
         <CardFooter className='mb-3' style={{ borderRadius: "4px" }}>
@@ -91,7 +91,7 @@ const Note = ({ deleteNote }) => {
         <div className='page-content container col-11 col-md-9 mx-auto my-auto'>
             <Card>
                 <CardBody>
-                    {showNoteForm ? <NoteForm setShowNoteForm={setShowNoteForm} /> : showNoteData}
+                    {showNoteForm ? <NoteForm setShowNoteForm={setShowNoteForm} note={note} setNote={setNote} /> : showNoteData}
                 </CardBody>
             </Card>
         </div>
