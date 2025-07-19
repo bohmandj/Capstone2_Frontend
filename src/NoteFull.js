@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import MemoLedgerApi from "./api";
 import MemoLedgerContext from './MemoLedgerContext';
 import NoteForm from "./NoteForm";
+import TagButtons from './TagButtons';
 import {
     Button,
     Card,
@@ -43,23 +44,6 @@ const Note = ({ deleteNote }) => {
         });
     }
 
-    const useRenderTagButtons = (tags = []) => {
-        const navigate = useNavigate();
-
-        return (tags = []) => tags.map((tag, idx) => (
-            <span key={tag}>
-                <Button
-                    size="sm"
-                    color="link"
-                    className="p-0 ms-0 me-2 my-2 d-inline align-baseline"
-                    onClick={() => navigate(`/tags/${encodeURIComponent(tag)}`)}
-                >
-                    {tag}
-                </Button>
-            </span>
-        ));
-    };
-
     const deletionWarning = () => {
         if (window.confirm("Are you sure you want to delete your note?\nThis action can not be undone.")) deleteNote(currentUser.username);
     }
@@ -74,8 +58,8 @@ const Note = ({ deleteNote }) => {
         <CardText style={{ whiteSpace: 'pre-wrap' }}>
             {note.noteBody}
         </CardText>
-        <CardFooter className='mb-3' style={{ borderRadius: "4px" }}>
-            {useRenderTagButtons(note.tags)}
+        <CardFooter className='mb-3 text-muted' style={{ borderRadius: "4px" }}>
+            <small>Tags:</small> <TagButtons tags={note.tags} />
         </CardFooter>
         <div className="d-flex justify-content-between gap-2 mt-3">
             <Button className="flex-fill me-1" onClick={() => setShowNoteForm(true)}>
