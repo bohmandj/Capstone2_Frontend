@@ -143,6 +143,21 @@ class MemoLedgerApi {
         );
         return res.note;
     }
+
+
+
+    /** Delete an existing note, 
+     * returns { deleted: noteId }
+     **/
+
+    static async deleteNote(noteId) {
+        let res = await this.request(
+            `notes/${noteId}`,
+            {},
+            "delete"
+        );
+        return res;
+    }
 }
 
 export default MemoLedgerApi;
