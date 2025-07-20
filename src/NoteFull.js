@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import MemoLedgerApi from "./api";
 import MemoLedgerContext from './MemoLedgerContext';
 import NoteForm from "./NoteForm";
+import NotePreview from './NotePreview';
 import TagButtons from './TagButtons';
 import {
     Button,
@@ -14,60 +15,10 @@ import {
     CardFooter
 } from 'reactstrap';
 
-const NoteFull = () => {
+const NoteFull = ({ formatTimestamp, note, setShowNoteForm, deleteNote }) => {
     /* Page to display note data & access btn to open edit form */
 
-    const { currentUser, setIsLoading } = useContext(MemoLedgerContext);
-    const { noteId } = useParams();
-    const navigate = useNavigate();
-
-    const [note, setNote] = useState({})
-    const [isNewNote, setIsNewNote] = useState(false);
-    const [showNoteForm, setShowNoteForm] = useState(false);
-
-    useEffect(() => {
-        if (!currentUser) navigate('/');
-
-        const getNote = async (noteId) => {
-            const noteRes = await MemoLedgerApi.getNote(noteId);
-            const isNew = noteRes.title === "Untitled" && !noteRes.noteBody;
-
-            setIsNewNote(isNew);
-            setNote(noteRes);
-            setShowNoteForm(isNew);
-        }
-        getNote(noteId);
-    }, [noteId]);
-
-    const formatTimestamp = (isoString, useAmPm = true) => {
-        const date = new Date(isoString);
-
-        return date.toLocaleString('en-US', {
-            month: 'long',
-            day: 'numeric',
-            year: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit',
-            hour12: useAmPm
-        });
-    }
-
-    const deleteNote = async (noteId) => {
-        if (isNewNote
-            ? window.confirm("Leaving without saving will delete your new note. Are you sure you want to leave?")
-            : window.confirm("Are you sure you want to delete your note?\nThis action can not be undone.")
-        ) {
-            setIsLoading(true);
-            const res = await MemoLedgerApi.deleteNote(noteId);
-            if (!res.deleted) {
-                alert("Error occurred during note deletion. Please try again.")
-            }
-            setIsLoading(false);
-            navigate('/');
-        }
-    }
-
-    const showNoteData = <>
+    return <>
         <CardTitle tag="h3">
             {note.title}
         </CardTitle>
@@ -89,25 +40,6 @@ const NoteFull = () => {
             </Button>
         </div>
     </>
-
-    return (
-        <div className='page-content container col-11 col-md-9 mx-auto my-auto'>
-            <Card>
-                <CardBody>
-                    {showNoteForm
-                        ? <NoteForm
-                            setShowNoteForm={setShowNoteForm}
-                            note={note}
-                            setNote={setNote}
-                            isNewNote={isNewNote}
-                            deleteNote={deleteNote}
-                        />
-                        : showNoteData
-                    }
-                </CardBody>
-            </Card>
-        </div>
-    )
 }
 
 export default NoteFull;
