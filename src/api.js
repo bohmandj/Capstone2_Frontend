@@ -114,7 +114,8 @@ class MemoLedgerApi {
             `notes/`,
             { userId },
             "post"
-        )
+        );
+        return res.note;
     }
 
     /** Get note data from noteId.
