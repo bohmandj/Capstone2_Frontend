@@ -1,14 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import MemoLedgerApi from "./api";
-import MemoLedgerContext from './MemoLedgerContext';
-import NoteForm from "./NoteForm";
-import NotePreview from './NotePreview';
+
 import TagButtons from './TagButtons';
 import {
     Button,
-    Card,
-    CardBody,
     CardTitle,
     CardSubtitle,
     CardText,
@@ -16,7 +9,7 @@ import {
 } from 'reactstrap';
 
 const NoteFull = ({ formatTimestamp, note, setShowNoteForm, deleteNote }) => {
-    /* Page to display note data & access btn to open edit form */
+    /* Page to display a full note with all data */
 
     return <>
         <CardTitle tag="h3">
