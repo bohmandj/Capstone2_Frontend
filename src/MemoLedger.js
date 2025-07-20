@@ -77,6 +77,24 @@ const MemoLedger = () => {
         navigate('/');
     }
 
+    const createNewNote = async () => {
+        try {
+            setIsLoading(true);
+            const newNote = await MemoLedgerApi.createNote(currentUser.userId);
+
+            navigate(`/notes/${newNote.noteId}`, {
+                state: {
+                    newNote: true,
+                    note: newNote
+                }
+            });
+        } catch (err) {
+            console.error("Error creating note:", err);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     if (isLoading) {
         return <Loading />;
     }
