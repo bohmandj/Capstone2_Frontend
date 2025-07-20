@@ -2,22 +2,17 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import MemoLedgerApi from "./api";
 import MemoLedgerContext from './MemoLedgerContext';
-import NoteForm from "./NoteForm";
 import NotePreview from './NotePreview';
-import TagButtons from './TagButtons';
+import NoteFull from './NoteFull';
+import NoteForm from "./NoteForm";
 import {
-    Button,
     Card,
     CardBody,
-    CardTitle,
-    CardSubtitle,
-    CardText,
-    CardFooter
 } from 'reactstrap';
-import NoteFull from './NoteFull';
 
 const Note = ({ showNotePreview = false }) => {
-    /* Page to display note data & access btn to open edit form */
+    /** Page to hold note related functionality & choose to display
+     * between a note-preview, a full-note, or a form to edit a note. */
 
     const { currentUser, setIsLoading } = useContext(MemoLedgerContext);
     const { noteId } = useParams();
@@ -68,29 +63,6 @@ const Note = ({ showNotePreview = false }) => {
             navigate('/');
         }
     }
-
-    const showNoteData = <>
-        <CardTitle tag="h3">
-            {note.title}
-        </CardTitle>
-        <CardSubtitle className='mb-3 text-muted'>
-            <small>Last Edited {formatTimestamp(note.editedAt)}</small>
-        </CardSubtitle>
-        <CardText style={{ whiteSpace: 'pre-wrap' }}>
-            {note.noteBody}
-        </CardText>
-        <CardFooter className='mb-3 text-muted' style={{ borderRadius: "4px" }}>
-            <small>Tags:</small> <TagButtons tags={note.tags} />
-        </CardFooter>
-        <div className="d-flex justify-content-between gap-2 mt-3">
-            <Button className="flex-fill me-1" onClick={() => setShowNoteForm(true)}>
-                Edit Note
-            </Button>
-            <Button className="flex-fill ms-1" color="danger" onClick={() => deleteNote(note.noteId)}>
-                Delete Note
-            </Button>
-        </div>
-    </>;
 
     return (
         <div className='page-content container col-11 col-md-9 mx-auto my-auto'>
