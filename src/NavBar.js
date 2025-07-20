@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect, useRef } from "react";
 import MemoLedgerContext from "./MemoLedgerContext";
 import { NavLink } from "react-router-dom";
 import {
+    Button,
     Navbar,
     NavbarBrand,
     NavbarToggler,
@@ -12,7 +13,7 @@ import {
 
 const NavBar = () => {
 
-    const { currentUser, logout } = useContext(MemoLedgerContext);
+    const { currentUser, logout, createNewNote } = useContext(MemoLedgerContext);
     const [isOpen, setIsOpen] = useState(false);
     const navRef = useRef();
 
@@ -60,6 +61,7 @@ const NavBar = () => {
                             <NavItem>
                                 <NavLink to="/search" className="nav-link">Search</NavLink>
                             </NavItem>
+                            <Button onClick={createNewNote} className="nav-link">New Note</Button>
                             <NavItem>
                                 <NavLink to="/profile" className="nav-link">Profile</NavLink>
                             </NavItem>
