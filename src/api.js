@@ -104,6 +104,19 @@ class MemoLedgerApi {
 
     //////////////////// Note Routes ////////////////////
 
+    /** Create a new note and get its data.
+     * Returns {userId, title, noteBody, createdAt, editedAt, tags}
+     *          where tags is [tagName,...]
+     */
+
+    static async createNote(userId) {
+        let res = await this.request(
+            `notes/`,
+            { userId },
+            "post"
+        )
+    }
+
     /** Get note data from noteId.
      * Returns {userId, title, noteBody, createdAt, editedAt, tags}
      *          where tags is [tagName,...]
