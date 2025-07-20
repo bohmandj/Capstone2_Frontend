@@ -53,7 +53,10 @@ const NoteFull = () => {
     }
 
     const deleteNote = async (noteId) => {
-        if (window.confirm("Are you sure you want to delete your note?\nThis action can not be undone.")) {
+        if (isNewNote
+            ? window.confirm("Leaving without saving will delete your new note. Are you sure you want to leave?")
+            : window.confirm("Are you sure you want to delete your note?\nThis action can not be undone.")
+        ) {
             setIsLoading(true);
             const res = await MemoLedgerApi.deleteNote(noteId);
             if (!res.deleted) {
