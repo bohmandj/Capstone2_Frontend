@@ -14,14 +14,14 @@ import {
     CardFooter
 } from 'reactstrap';
 
-const Note = ({ deleteNote }) => {
+const NoteFull = ({ deleteNote, newNote = false }) => {
     /* Page to display note data & access btn to open edit form */
 
     const { currentUser } = useContext(MemoLedgerContext);
     const { noteId } = useParams();
 
     const [note, setNote] = useState({})
-    const [showNoteForm, setShowNoteForm] = useState(false);
+    const [showNoteForm, setShowNoteForm] = useState(!newNote ? false : true);
 
     useEffect(() => {
         const getNote = async (noteId) => {
@@ -75,11 +75,19 @@ const Note = ({ deleteNote }) => {
         <div className='page-content container col-11 col-md-9 mx-auto my-auto'>
             <Card>
                 <CardBody>
-                    {showNoteForm ? <NoteForm setShowNoteForm={setShowNoteForm} note={note} setNote={setNote} /> : showNoteData}
+                    {showNoteForm
+                        ? <NoteForm
+                            setShowNoteForm={setShowNoteForm}
+                            note={note}
+                            setNote={setNote}
+                            newNote={newNote}
+                        />
+                        : showNoteData
+                    }
                 </CardBody>
             </Card>
         </div>
     )
 }
 
-export default Note;
+export default NoteFull;

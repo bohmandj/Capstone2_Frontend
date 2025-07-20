@@ -12,7 +12,7 @@ import {
     Label
 } from "reactstrap";
 
-const NoteForm = ({ note, setNote, setShowNoteForm }) => {
+const NoteForm = ({ note, setNote, setShowNoteForm, newNote = false }) => {
     /* Note form to update Note data */
 
     const { currentUser, setIsLoading } = useContext(MemoLedgerContext);
@@ -80,7 +80,7 @@ const NoteForm = ({ note, setNote, setShowNoteForm }) => {
 
     return (<>
         <CardTitle tag="h3">
-            Edit Note
+            {newNote ? "New Note" : "Edit Note"}
         </CardTitle>
         <Form onSubmit={handleSubmit}>
             <FormGroup>
