@@ -101,7 +101,7 @@ const MemoLedger = () => {
 
     return (
         <div className="MemoLedger">
-            <MemoLedgerContext.Provider value={{ setIsLoading, currentUser, setCurrentUser, login, logout, register }}>
+            <MemoLedgerContext.Provider value={{ setIsLoading, currentUser, setCurrentUser, login, logout, register, createNewNote }}>
                 <NavBar />
                 <MemoLedgerRoutes />
             </MemoLedgerContext.Provider>
