@@ -12,7 +12,7 @@ import {
     Label
 } from "reactstrap";
 
-const NoteForm = ({ note, setNote, setShowNoteForm, newNote = false }) => {
+const NoteForm = ({ note, setNote, setShowNoteForm, deleteNote, isNewNote = false }) => {
     /* Note form to update Note data */
 
     const { currentUser, setIsLoading } = useContext(MemoLedgerContext);
@@ -73,14 +73,18 @@ const NoteForm = ({ note, setNote, setShowNoteForm, newNote = false }) => {
     };
 
     const handleCancel = () => {
-        setFormData(INPUTS_INITIAL_STATE);
-        setTitleExists(true);
-        setShowNoteForm(false);
+        if (isNewNote) {
+            deleteNote(note.noteId);
+        } else {
+            setFormData(INPUTS_INITIAL_STATE);
+            setTitleExists(true);
+            setShowNoteForm(false);
+        }
     }
 
     return (<>
         <CardTitle tag="h3">
-            {newNote ? "New Note" : "Edit Note"}
+            {isNewNote ? "New Note" : "Edit Note"}
         </CardTitle>
         <Form onSubmit={handleSubmit}>
             <FormGroup>

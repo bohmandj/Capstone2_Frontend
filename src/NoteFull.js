@@ -14,19 +14,27 @@ import {
     CardFooter
 } from 'reactstrap';
 
-const NoteFull = ({ deleteNote, newNote = false }) => {
+const NoteFull = () => {
     /* Page to display note data & access btn to open edit form */
 
-    const { currentUser } = useContext(MemoLedgerContext);
+    const { currentUser, setIsLoading } = useContext(MemoLedgerContext);
     const { noteId } = useParams();
+    const navigate = useNavigate();
 
     const [note, setNote] = useState({})
-    const [showNoteForm, setShowNoteForm] = useState(!newNote ? false : true);
+    const [isNewNote, setIsNewNote] = useState(false);
+    const [showNoteForm, setShowNoteForm] = useState(false);
 
     useEffect(() => {
+        if (!currentUser) navigate('/');
+
         const getNote = async (noteId) => {
-            const note = await MemoLedgerApi.getNote(noteId);
-            setNote(note);
+            const noteRes = await MemoLedgerApi.getNote(noteId);
+            const isNew = noteRes.title === "Untitled" && !noteRes.noteBody;
+
+            setIsNewNote(isNew);
+            setNote(noteRes);
+            setShowNoteForm(isNew);
         }
         getNote(noteId);
     }, [noteId]);
@@ -44,8 +52,16 @@ const NoteFull = ({ deleteNote, newNote = false }) => {
         });
     }
 
-    const deletionWarning = () => {
-        if (window.confirm("Are you sure you want to delete your note?\nThis action can not be undone.")) deleteNote(currentUser.username);
+    const deleteNote = async (noteId) => {
+        if (window.confirm("Are you sure you want to delete your note?\nThis action can not be undone.")) {
+            setIsLoading(true);
+            const res = await MemoLedgerApi.deleteNote(noteId);
+            if (!res.deleted) {
+                alert("Error occurred during note deletion. Please try again.")
+            }
+            setIsLoading(false);
+            navigate('/');
+        }
     }
 
     const showNoteData = <>
@@ -65,7 +81,7 @@ const NoteFull = ({ deleteNote, newNote = false }) => {
             <Button className="flex-fill me-1" onClick={() => setShowNoteForm(true)}>
                 Edit Note
             </Button>
-            <Button className="flex-fill ms-1" color="danger" onClick={() => deletionWarning()}>
+            <Button className="flex-fill ms-1" color="danger" onClick={() => deleteNote(note.noteId)}>
                 Delete Note
             </Button>
         </div>
@@ -80,7 +96,8 @@ const NoteFull = ({ deleteNote, newNote = false }) => {
                             setShowNoteForm={setShowNoteForm}
                             note={note}
                             setNote={setNote}
-                            newNote={newNote}
+                            isNewNote={isNewNote}
+                            deleteNote={deleteNote}
                         />
                         : showNoteData
                     }
