@@ -195,7 +195,7 @@ class MemoLedgerApi {
         if (q) queryInputs.push(`q=${q}`);
         if (sTitle) queryInputs.push(`sTitle=${sTitle}`);
         if (sTags) queryInputs.push(`sTags=${sTags}`);
-        if (sText) queryInputs.push(`sTags=${sText}`);
+        if (sText) queryInputs.push(`sText=${sText}`);
         if (["newest", "oldest", "editTime"].includes(order))
             queryInputs.push(`order=${order}`);
         const queryStr = queryInputs.length > 0
