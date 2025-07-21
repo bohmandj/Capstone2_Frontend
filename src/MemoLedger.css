@@ -129,6 +129,83 @@ button.navbar-toggler.active {
     background-color: var(--tertiary-bg-color);
 }
 
+.card.card-secondary {
+    background-color: var(--nav-bg-color);
+    background: linear-gradient(90deg, var(--nav-bg-color) -40%, var(--main-bg-color) 50%, var(--nav-bg-color) 140%);
+    color: var(--tertiary-bg-color);
+    padding: 0;
+    margin: 0rem;
+    border-radius: 1rem;
+    border-color: var(--nav-bg-color);
+}
+
+.card-secondary h2 {
+    font-weight: bold;
+}
+
+.card-secondary.card-body {
+    margin: 0 1rem;
+}
+
 .card-body {
-    margin: 2rem 1rem;
+    margin: 1rem;
+}
+
+.card.note-preview {
+    margin: 1rem 0;
+    cursor: pointer;
+}
+
+.card.note-preview button:hover {
+    background-color: #0d6efd;
+}
+
+.card-body.note-preview {
+    margin: 0;
+    margin-top: 0.5rem;
+    padding: 0;
+    text-align: left;
+}
+
+.card-body.note-preview .card-title {
+    margin: 0;
+    padding: 0 1rem;
+}
+
+.card-body.note-preview .card-subtitle {
+    margin: 0;
+    padding: 0 1rem;
+}
+
+.card-body.note-preview .card-text {
+    margin: 0;
+    margin-top: -0.5rem;
+    margin-bottom: 0.8rem;
+    padding: 0 1rem;
+}
+
+.card-body.note-preview .card-footer {
+    margin: 0;
+    padding: 0 1rem;
+}
+
+.preview-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    /* Number of lines to show */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.4em;
+    /* Optional: adjust for spacing */
+    max-height: 2.8em;
+    /* 2 lines × line-height */
+}
+
+.card.tags-list {
+    margin: 1rem 0;
+}
+
+.card-body.tags-list {
+    margin: 0;
 }
