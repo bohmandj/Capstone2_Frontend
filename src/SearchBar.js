@@ -23,6 +23,7 @@ const SearchBar = () => {
     const [searchTags, setSearchTags] = useState(true);
     const [searchText, setSearchText] = useState(false);
     const [order, setOrder] = useState('editTime');
+    const [hasSearched, setHasSearched] = useState(false);
     const [results, setResults] = useState([]);
     const [loading, setLoading] = useState(false);
 
@@ -31,6 +32,8 @@ const SearchBar = () => {
 
     const handleSearch = async (e) => {
         e.preventDefault();
+
+        setHasSearched(true);
         setLoading(true);
         try {
             const notes = await MemoLedgerApi.searchNotes(
@@ -113,7 +116,7 @@ const SearchBar = () => {
                     </CardBody>
                 </Card>
 
-                {results
+                {hasSearched
                     && <Card className='my-4 card-secondary'>
                         <CardBody className='card-secondary'>
                             <CardTitle tag="h3">Search Results:</CardTitle>
