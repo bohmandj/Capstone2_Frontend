@@ -217,6 +217,19 @@ class MemoLedgerApi {
         const res = await this.request(`notes/${noteId}/tags`, { tags }, 'post');
         return res.added;
     }
+
+    /** Remove tags from a note.
+     * 
+     * Returns { removed: ["tag1", "tag2"], fromNote: noteId }
+     */
+    static async removeTagsFromNote(noteId, tags) {
+        const res = await this.request(
+            `notes/${noteId}/tags`,
+            { tags },
+            "delete"
+        );
+        return res.removed;
+    }
 }
 
 export default MemoLedgerApi;
