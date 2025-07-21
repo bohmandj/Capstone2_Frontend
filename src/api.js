@@ -8,7 +8,7 @@ const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
  * There shouldn't be any frontend-specific stuff here, and there shouldn't 
  * be any API-aware stuff elsewhere in the frontend.
  * 
- */
+ **/
 
 class MemoLedgerApi {
     // the token for interactive with the API will be stored here.
@@ -41,7 +41,7 @@ class MemoLedgerApi {
      * Returns { userId, username, email, is_admin, notes }
      *   where notes is [{userId, title, noteBody, createdAt, editedAt, tags}},...]
      *   where tags is [tagName,...]
-     */
+     **/
 
     static async getUser(username) {
         let res = await this.request(
@@ -102,12 +102,30 @@ class MemoLedgerApi {
         return res;
     }
 
+    /** Get tags used by user, 
+     * Returns { tags: ["tagName", ...]}
+     **/
+
+    static async getTagsByUser(username, limit, offset) {
+        const queryInputs = [];
+        if (limit) queryInputs.push(`limit=${limit}`);
+        if (offset) queryInputs.push(`offset=${offset}`);
+        const queryStr = queryInputs.length > 0
+            ? `?${queryInputs.join("&")}`
+            : "";
+
+        let res = await this.request(
+            `users/${username}/tags/${queryStr}`
+        );
+        return res.tags;
+    }
+
     //////////////////// Note Routes ////////////////////
 
     /** Create a new note and get its data.
      * Returns {userId, title, noteBody, createdAt, editedAt, tags}
      *          where tags is [tagName,...]
-     */
+     **/
 
     static async createNote(userId) {
         let res = await this.request(
@@ -121,7 +139,7 @@ class MemoLedgerApi {
     /** Get note data from noteId.
      * Returns {userId, title, noteBody, createdAt, editedAt, tags}
      *          where tags is [tagName,...]
-     */
+     **/
 
     static async getNote(noteId) {
         let res = await this.request(
@@ -133,7 +151,7 @@ class MemoLedgerApi {
     /** Update an existing note, 
      * Returns {userId, title, noteBody, createdAt, editedAt, tags}
      *          where tags is [tagName,...]
-     */
+     **/
 
     static async updateNote(noteId, title, noteBody) {
         let res = await this.request(
@@ -143,8 +161,6 @@ class MemoLedgerApi {
         );
         return res.note;
     }
-
-
 
     /** Delete an existing note, 
      * returns { deleted: noteId }
