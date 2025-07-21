@@ -174,6 +174,39 @@ class MemoLedgerApi {
         );
         return res;
     }
+
+    /** Search database for notes.
+     * 
+     * Optional inputs:
+     *      "q" - search term string
+     *      "sTitle" - bool to include titles in search results
+     *      "sTags" - bool to include tagNames in search results
+     *      "sText" - bool to include noteBody text in search results
+     * 
+     * returns {notes: [
+     *             { noteId, userId, title, noteBody, 
+     *               createdAt, editedAt, tags }, 
+     *             ... 
+     *         ]}
+     **/
+
+    static async searchNotes(q, sTitle, sTags, sText, order) {
+        const queryInputs = [];
+        if (q) queryInputs.push(`q=${q}`);
+        if (sTitle) queryInputs.push(`sTitle=${sTitle}`);
+        if (sTags) queryInputs.push(`sTags=${sTags}`);
+        if (sText) queryInputs.push(`sTags=${sText}`);
+        if (["newest", "oldest", "editTime"].includes(order))
+            queryInputs.push(`order=${order}`);
+        const queryStr = queryInputs.length > 0
+            ? `?${queryInputs.join("&")}`
+            : "";
+
+        let res = await this.request(
+            `notes/${queryStr}`
+        )
+        return res.notes;
+    }
 }
 
 export default MemoLedgerApi;
