@@ -5,6 +5,7 @@ import Home from './Home';
 import SignupForm from './SignupForm';
 import Profile from './Profile';
 import Note from './Note';
+import SearchBar from './SearchBar';
 
 const MemoLedgerRoutes = () => {
     return (
@@ -13,6 +14,7 @@ const MemoLedgerRoutes = () => {
             <Route path="/login" element={<LoginForm />} />
             <Route path="/signup" element={<SignupForm />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/search" element={<SearchBar />} />
             <Route path="/" element={<Home />} />
             <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
