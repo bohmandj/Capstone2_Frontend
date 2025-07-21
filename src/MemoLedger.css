@@ -191,15 +191,16 @@ button.navbar-toggler.active {
 
 .preview-text {
     display: -webkit-box;
-    -webkit-line-clamp: 2;
-    /* Number of lines to show */
     -webkit-box-orient: vertical;
+    /* Number of lines to show */
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
     overflow: hidden;
     text-overflow: ellipsis;
-    line-height: 1.4em;
     /* Optional: adjust for spacing */
-    max-height: 2.8em;
+    line-height: 1.4em;
     /* 2 lines × line-height */
+    max-height: 2.8em;
 }
 
 .card.tags-list {
