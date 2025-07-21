@@ -1,14 +1,13 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import MemoLedgerContext from "./MemoLedgerContext";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import {
-    Button,
+    Collapse,
+    Nav,
     Navbar,
     NavbarBrand,
     NavbarToggler,
-    Collapse,
-    Nav,
-    NavItem
+    NavItem,
 } from "reactstrap";
 
 const NavBar = () => {
@@ -59,14 +58,31 @@ const NavBar = () => {
                     {currentUser ? (
                         <>
                             <NavItem>
-                                <NavLink to="/search" className="nav-link">Search</NavLink>
-                            </NavItem>
-                            <Button onClick={createNewNote} className="nav-link">New Note</Button>
-                            <NavItem>
-                                <NavLink to="/profile" className="nav-link">Profile</NavLink>
+                                <NavLink to="/search" className="nav-link">
+                                    Search
+                                </NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink to="/logout" className="nav-link" onClick={logout}>Log out</NavLink>
+                                <NavLink
+                                    tag={Link}
+                                    className="nav-link no-active"
+                                    to="/new-note-action"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        createNewNote();
+                                    }}>
+                                    New Note
+                                </NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink to="/profile" className="nav-link">
+                                    Profile
+                                </NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink to="/logout" className="nav-link" onClick={logout}>
+                                    Log out
+                                </NavLink>
                             </NavItem>
                         </>
                     ) : (
