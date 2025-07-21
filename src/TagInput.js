@@ -49,7 +49,15 @@ const TagInput = ({ tags, setTags, label = "Add Tag", showTagList = true }) => {
         <FormGroup>
             {showTagList && (
                 <CardFooter className='mb-3 text-muted' style={{ borderRadius: "4px" }}>
-                    <small>Tags:</small> <TagButtons tags={tags} />
+                    <small>Tags: </small>
+                    <TagButtons
+                        tags={tags}
+                        editable={true}
+                        size="md"
+                        onDelete={(tagToRemove) =>
+                            setTags(tags.filter((t) => t !== tagToRemove))
+                        }
+                    />
                 </CardFooter>
             )}
             <Label className='font-weight-bold' htmlFor='tagInput'>{label}:</Label>

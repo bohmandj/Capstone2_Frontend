@@ -69,19 +69,26 @@ const NoteForm = ({ note, setNote, setShowNoteForm, deleteNote, isNewNote = fals
         }
 
         const newTags = formData.tags.filter(t => !note.tags.includes(t));
+        const removedTags = note.tags.filter(t => !formData.tags.includes(t));
 
         const notePromise = updateNote(formData);
-        const tagPromise = newTags.length > 0
+        const tagAddPromise = newTags.length > 0
             ? MemoLedgerApi.addTagsToNote(note.noteId, newTags)
             : Promise.resolve();
+        const tagRemovePromise = removedTags.length > 0
+            ? MemoLedgerApi.removeTagsFromNote(note.noteId, removedTags)
+            : Promise.resolve();
 
-        await Promise.all([notePromise, tagPromise]);
+        await Promise.all([notePromise, tagAddPromise, tagRemovePromise]);
 
         // Merge new tags into current note state
         if (newTags.length > 0) {
             setNote(n => ({
                 ...n,
-                tags: [...n.tags, ...newTags]
+                tags: [
+                    ...n.tags.filter(t => !removedTags.includes(t)),
+                    ...newTags
+                ]
             }));
         }
     };
