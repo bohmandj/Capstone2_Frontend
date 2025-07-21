@@ -1,10 +1,13 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import MemoLedgerContext from './MemoLedgerContext';
 import MemoLedgerApi from './api';
+import TagButtons from './TagButtons';
+import TagInput from './TagInput';
 import {
     Button,
     CardTitle,
+    CardFooter,
     Form,
     FormFeedback,
     FormGroup,
@@ -18,14 +21,11 @@ const NoteForm = ({ note, setNote, setShowNoteForm, deleteNote, isNewNote = fals
     const { currentUser, setIsLoading } = useContext(MemoLedgerContext);
     const navigate = useNavigate();
 
-    const inputs = [
-        "title",
-        "noteBody"
-    ]
-    const INPUTS_INITIAL_STATE = inputs.reduce((obj, input) => {
-        obj[input] = note[input] || "";
-        return obj;
-    }, {});
+    const INPUTS_INITIAL_STATE = {
+        title: note.title || "",
+        noteBody: note.noteBody || "",
+        tags: note.tags || []
+    };
 
     const [formData, setFormData] = useState(INPUTS_INITIAL_STATE);
     const [titleExists, setTitleExists] = useState(true);
@@ -64,12 +64,28 @@ const NoteForm = ({ note, setNote, setShowNoteForm, deleteNote, isNewNote = fals
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if ((!String(formData.title).trim())) {
+
+        if (!String(formData.title).trim()) {
             setTitleExists(false);
-            return undefined;
+            return;
         }
 
-        updateNote(formData);
+        const newTags = formData.tags.filter(t => !note.tags.includes(t));
+
+        const notePromise = updateNote(formData);
+        const tagPromise = newTags.length > 0
+            ? MemoLedgerApi.addTagsToNote(note.noteId, newTags)
+            : Promise.resolve();
+
+        await Promise.all([notePromise, tagPromise]);
+
+        // Merge new tags into current note state
+        if (newTags.length > 0) {
+            setNote(n => ({
+                ...n,
+                tags: [...n.tags, ...newTags]
+            }));
+        }
     };
 
     const handleCancel = () => {
@@ -117,6 +133,12 @@ const NoteForm = ({ note, setNote, setShowNoteForm, deleteNote, isNewNote = fals
                     className='h-auto'
                 />
             </FormGroup>
+
+            <TagInput
+                tags={formData.tags}
+                setTags={(newTags) => setFormData(f => ({ ...f, tags: newTags }))}
+                label="Add Tag"
+            />
 
             <Button name="submit" className='w-100' color='success'>Submit</Button>
             <Button className='w-100 mt-2' onClick={() => handleCancel()}>Cancel</Button>
