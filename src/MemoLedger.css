@@ -210,3 +210,25 @@ button.navbar-toggler.active {
 .card-body.tags-list {
     margin: 0;
 }
+
+/* +++++++++++++  Tag Components  +++++++++++++  */
+
+.tag-wrapper {
+    font-size: 0.85rem;
+}
+
+.tag-close-btn {
+    background-color: transparent;
+    filter: invert(1);
+    /* make X visible on red button */
+}
+
+.tag-close-btn:hover {
+    opacity: 0.9;
+}
+
+.editable-tag .btn:hover {
+    background-color: var(--bs-danger) !important;
+    border-color: var(--bs-danger) !important;
+    color: white !important;
+}
