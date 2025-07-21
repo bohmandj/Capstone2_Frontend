@@ -193,9 +193,9 @@ class MemoLedgerApi {
     static async searchNotes(q, sTitle, sTags, sText, order) {
         const queryInputs = [];
         if (q) queryInputs.push(`q=${q}`);
-        if (sTitle) queryInputs.push(`sTitle=${sTitle}`);
-        if (sTags) queryInputs.push(`sTags=${sTags}`);
-        if (sText) queryInputs.push(`sText=${sText}`);
+        if (sTitle !== undefined) queryInputs.push(`sTitle=${sTitle}`);
+        if (sTags !== undefined) queryInputs.push(`sTags=${sTags}`);
+        if (sText !== undefined) queryInputs.push(`sText=${sText}`);
         if (["newest", "oldest", "editTime"].includes(order))
             queryInputs.push(`order=${order}`);
         const queryStr = queryInputs.length > 0
