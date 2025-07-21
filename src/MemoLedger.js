@@ -11,6 +11,7 @@ const MemoLedger = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [token, setToken] = useState(false);
     const [currentUser, setCurrentUser] = useState(false);
+    const [notes, setNotes] = useState([])
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -101,7 +102,7 @@ const MemoLedger = () => {
 
     return (
         <div className="MemoLedger">
-            <MemoLedgerContext.Provider value={{ setIsLoading, currentUser, setCurrentUser, login, logout, register, createNewNote }}>
+            <MemoLedgerContext.Provider value={{ isLoading, setIsLoading, currentUser, setCurrentUser, login, logout, register, createNewNote, notes, setNotes }}>
                 <NavBar />
                 <MemoLedgerRoutes />
             </MemoLedgerContext.Provider>
