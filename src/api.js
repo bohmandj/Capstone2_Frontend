@@ -207,6 +207,16 @@ class MemoLedgerApi {
         )
         return res.notes;
     }
+
+    /** Add tags to note. 
+     * 
+     * Returns { added: ["tag1", "tag2"], toNote: noteId }
+    */
+
+    static async addTagsToNote(noteId, tags) {
+        const res = await this.request(`notes/${noteId}/tags`, { tags }, 'post');
+        return res.added;
+    }
 }
 
 export default MemoLedgerApi;
