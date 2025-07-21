@@ -38,10 +38,10 @@ const MemoLedger = () => {
     }
 
     const applyToken = async (tokenStr) => {
-        MemoLedgerApi.token = tokenStr;
+        setToken(tokenStr);
         const { username } = jwtDecode(tokenStr);
         await getUser(username);
-        setToken(tokenStr);
+        MemoLedgerApi.token = tokenStr;
     }
 
     const login = async (loginFormData) => {
@@ -61,8 +61,11 @@ const MemoLedger = () => {
         localStorage.removeItem("token");
         setToken(false);
         setCurrentUser(false);
+        setNotes([]);
+        MemoLedgerApi.token = null;
         navigate('/');
-    }
+    };
+
 
     const register = async (registrationFormData) => {
         setIsLoading(true);
