@@ -21,7 +21,7 @@ const Home = () => {
                 {!currentUser && <>
                     <Card>
                         <CardBody>
-                            <CardTitle tag="h1 mx-auto">MemoLedger </CardTitle>
+                            <CardTitle tag="h1" className='mx-auto'>MemoLedger </CardTitle>
                             <CardSubtitle tag="h6" className='my-3'>
                                 Where your life's notes stay organized.
                             </CardSubtitle>
@@ -54,8 +54,6 @@ const Home = () => {
                         </CardBody>
                     </Card>
                 </>}
-
-
             </div>
         </div >
     )
