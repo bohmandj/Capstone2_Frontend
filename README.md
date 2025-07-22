@@ -1,6 +1,6 @@
 # MemoLedger
 
-[https://modlist.onrender.com/](https://modlist.onrender.com/)
+[https://memoledger.onrender.com/](https://memoledger.onrender.com/)
 
 A note taking app - "Where your life's notes stay organized."
 
