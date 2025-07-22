@@ -6,9 +6,9 @@ import NotePreview from './NotePreview';
 import Loading from './Loading';
 
 
-const NoteList = () => {
+const NoteList = ({ limit = 10, tagName = false }) => {
     /* Component to display a list of note previews for 
-    * all of a user's notes */
+    * some or all of a user's notes */
 
     const { currentUser, notes, setNotes } = useContext(MemoLedgerContext);
 
@@ -18,8 +18,15 @@ const NoteList = () => {
         const getNotes = async () => {
             setNotesListLoading(true);
             try {
-                const notesRes = await MemoLedgerApi.searchNotes();
-                setNotes(notesRes);
+                const notesRes = tagName
+                    ? await MemoLedgerApi.searchNotes(tagName, false, true, false)
+                    : await MemoLedgerApi.searchNotes();
+                if (limit) {
+                    const limitedNotes = notesRes.slice(0, limit);
+                    setNotes(limitedNotes);
+                } else {
+                    setNotes(notesRes);
+                }
             } catch (err) {
                 console.error("Error fetching notes:", err);
             } finally {
