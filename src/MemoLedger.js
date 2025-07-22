@@ -38,10 +38,11 @@ const MemoLedger = () => {
     }
 
     const applyToken = async (tokenStr) => {
+        MemoLedgerApi.token = tokenStr;
         setToken(tokenStr);
+
         const { username } = jwtDecode(tokenStr);
         await getUser(username);
-        MemoLedgerApi.token = tokenStr;
     }
 
     const login = async (loginFormData) => {
