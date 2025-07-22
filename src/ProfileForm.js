@@ -169,6 +169,7 @@ const ProfileForm = ({ setShowProfileForm }) => {
                     htmlFor='email'
                 >Email:</Label>
                 <Input
+                    id='email'
                     type="email"
                     name="email"
                     value={formData.email}
@@ -187,6 +188,7 @@ const ProfileForm = ({ setShowProfileForm }) => {
                     htmlFor='password'
                 >New Password:</Label>
                 <Input
+                    id='password'
                     type="password"
                     name="password"
                     value={formData.password}
@@ -207,6 +209,7 @@ const ProfileForm = ({ setShowProfileForm }) => {
                     htmlFor='confirmPassword'
                 >Confirm New Password:</Label>
                 <Input
+                    id='confirmPassword'
                     type="password"
                     name="confirmPassword"
                     value={formData.confirmPassword}
