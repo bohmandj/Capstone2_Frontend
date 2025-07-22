@@ -114,6 +114,7 @@ const NoteForm = ({ note, setNote, setShowNoteForm, deleteNote, isNewNote = fals
                     htmlFor='title'
                 >Title:</Label>
                 <Input
+                    id='title'
                     type="title"
                     name="title"
                     value={formData.title}
@@ -131,6 +132,7 @@ const NoteForm = ({ note, setNote, setShowNoteForm, deleteNote, isNewNote = fals
                     htmlFor='noteBody'
                 >Note Body:</Label>
                 <Input
+                    id='noteBody'
                     type="textarea"
                     name="noteBody"
                     value={formData.noteBody}
