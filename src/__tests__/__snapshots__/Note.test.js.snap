@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Note.js matches snapshot when displaying NoteForm (new note) 1`] = `
+<DocumentFragment>
+  <div
+    class="page-content container col-11 col-md-9 mx-auto my-auto"
+  >
+    <div
+      class="card"
+    >
+      <div
+        class="card-body"
+      >
+        <div
+          data-testid="NoteForm"
+        >
+          NoteForm for Untitled (New: true)
+          <button>
+            Cancel Form
+          </button>
+          <button>
+            Delete Form
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Note.js matches snapshot when displaying NoteFull 1`] = `
+<DocumentFragment>
+  <div
+    class="page-content container col-11 col-md-9 mx-auto my-auto"
+  >
+    <div
+      class="card"
+    >
+      <div
+        class="card-body"
+      >
+        <div
+          data-testid="NoteFull"
+        >
+          NoteFull for Test Note
+          <button>
+            Edit
+          </button>
+          <button>
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginForm matches snapshot when logged out 1`] = `
+<DocumentFragment>
+  <div
+    class="page-content form-container container col-11 col-md-6 col-lg-5 col-xl-4 mx-auto my-auto"
+  >
+    <div
+      class="card"
+    >
+      <div
+        class="card-body"
+      >
+        <h3
+          class="card-title"
+        >
+          Log In
+        </h3>
+        <form
+          class=""
+        >
+          <div
+            class="mb-3"
+          >
+            <label
+              class="text-capitalize font-weight-bold form-label"
+              for="username"
+            >
+              username
+            </label>
+            <input
+              class="form-control"
+              id="username"
+              name="username"
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            class="mb-3"
+          >
+            <label
+              class="text-capitalize font-weight-bold form-label"
+              for="password"
+            >
+              password
+            </label>
+            <input
+              class="form-control"
+              id="password"
+              name="password"
+              type="text"
+              value=""
+            />
+          </div>
+          <button
+            class="w-100 btn btn-secondary"
+            name="submit"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`LoginForm renders without crashing when logged in and redirects 1`] = `<DocumentFragment />`;

@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotesList.js matches snapshot when displaying a list of notes 1`] = `
+<DocumentFragment>
+  <div
+    data-testid="NotePreview-1"
+  >
+    <h3>
+      Note One
+    </h3>
+    <p>
+      Body for note one.
+    </p>
+  </div>
+  <div
+    data-testid="NotePreview-2"
+  >
+    <h3>
+      Note Two
+    </h3>
+    <p>
+      Body for note two.
+    </p>
+  </div>
+  <div
+    data-testid="NotePreview-3"
+  >
+    <h3>
+      Note Three
+    </h3>
+    <p>
+      Body for note three.
+    </p>
+  </div>
+  <div
+    data-testid="NotePreview-4"
+  >
+    <h3>
+      Note Four
+    </h3>
+    <p>
+      Body for note four.
+    </p>
+  </div>
+  <div
+    data-testid="NotePreview-5"
+  >
+    <h3>
+      Note Five
+    </h3>
+    <p>
+      Body for note five.
+    </p>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`NotesList.js matches snapshot when displaying empty notes state 1`] = `<DocumentFragment />`;

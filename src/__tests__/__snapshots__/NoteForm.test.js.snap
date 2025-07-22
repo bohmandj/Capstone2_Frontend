@@ -1,0 +1,176 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NoteForm.js matches snapshot for edit note form 1`] = `
+<DocumentFragment>
+  <h3
+    class="card-title"
+  >
+    Edit Note
+  </h3>
+  <form
+    class=""
+  >
+    <div
+      class="mb-3"
+    >
+      <label
+        class="font-weight-bold form-label"
+        for="title"
+      >
+        Title:
+      </label>
+      <input
+        aria-invalid="false"
+        class="form-control"
+        id="title"
+        name="title"
+        type="title"
+        value="Existing Title"
+      />
+    </div>
+    <div
+      class="mb-3"
+    >
+      <label
+        class="font-weight-bold form-label"
+        for="noteBody"
+      >
+        Note Body:
+      </label>
+      <textarea
+        class="h-auto form-control"
+        id="noteBody"
+        name="noteBody"
+      >
+        Existing Body
+      </textarea>
+    </div>
+    <div
+      data-testid="tag-input-mock"
+    >
+      <label
+        for="tagInputMock"
+      >
+        Add Tag
+      </label>
+      <input
+        data-testid="tag-add-input"
+        id="tagInputMock"
+        value=""
+      />
+      <button
+        data-testid="add-tag-button"
+      >
+        Add Tag
+      </button>
+      <div
+        data-testid="current-tags-display"
+      >
+        <span
+          data-testid="tag-tagA"
+        >
+          tagA
+        </span>
+        <span
+          data-testid="tag-tagB"
+        >
+          tagB
+        </span>
+      </div>
+    </div>
+    <button
+      class="w-100 btn btn-success"
+      name="submit"
+    >
+      Submit
+    </button>
+    <button
+      class="w-100 mt-2 btn btn-secondary"
+      type="button"
+    >
+      Cancel
+    </button>
+  </form>
+</DocumentFragment>
+`;
+
+exports[`NoteForm.js matches snapshot for new note form 1`] = `
+<DocumentFragment>
+  <h3
+    class="card-title"
+  >
+    New Note
+  </h3>
+  <form
+    class=""
+  >
+    <div
+      class="mb-3"
+    >
+      <label
+        class="font-weight-bold form-label"
+        for="title"
+      >
+        Title:
+      </label>
+      <input
+        aria-invalid="false"
+        class="form-control"
+        id="title"
+        name="title"
+        type="title"
+        value=""
+      />
+    </div>
+    <div
+      class="mb-3"
+    >
+      <label
+        class="font-weight-bold form-label"
+        for="noteBody"
+      >
+        Note Body:
+      </label>
+      <textarea
+        class="h-auto form-control"
+        id="noteBody"
+        name="noteBody"
+      />
+    </div>
+    <div
+      data-testid="tag-input-mock"
+    >
+      <label
+        for="tagInputMock"
+      >
+        Add Tag
+      </label>
+      <input
+        data-testid="tag-add-input"
+        id="tagInputMock"
+        value=""
+      />
+      <button
+        data-testid="add-tag-button"
+      >
+        Add Tag
+      </button>
+      <div
+        data-testid="current-tags-display"
+      />
+    </div>
+    <button
+      class="w-100 btn btn-success"
+      name="submit"
+    >
+      Submit
+    </button>
+    <button
+      class="w-100 mt-2 btn btn-secondary"
+      type="button"
+    >
+      Cancel
+    </button>
+  </form>
+</DocumentFragment>
+`;

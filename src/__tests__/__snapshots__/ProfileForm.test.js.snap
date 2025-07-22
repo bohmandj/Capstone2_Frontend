@@ -1,0 +1,100 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProfileForm matches snapshot when logged in 1`] = `
+<DocumentFragment>
+  <h3
+    class="card-title"
+  >
+    Edit Profile
+  </h3>
+  <form
+    class=""
+  >
+    <div
+      class="mb-3"
+    >
+      <label
+        class="font-weight-bold form-label"
+        for="username"
+      >
+        Username:
+      </label>
+      <input
+        class="form-control"
+        disabled=""
+        id="username"
+        name="username"
+        placeholder="testuser"
+        readonly=""
+        type="text"
+      />
+    </div>
+    <div
+      class="mb-3"
+    >
+      <label
+        class="font-weight-bold form-label"
+        for="email"
+      >
+        Email:
+      </label>
+      <input
+        aria-invalid="false"
+        class="form-control"
+        id="email"
+        name="email"
+        type="email"
+        value="test@user.com"
+      />
+    </div>
+    <div
+      class="mb-3"
+    >
+      <label
+        class="font-weight-bold form-label"
+        for="password"
+      >
+        New Password:
+      </label>
+      <input
+        aria-invalid="false"
+        class="form-control"
+        id="password"
+        name="password"
+        type="password"
+        value=""
+      />
+    </div>
+    <div
+      class="mb-3"
+    >
+      <label
+        class="font-weight-bold form-label"
+        for="confirmPassword"
+      >
+        Confirm New Password:
+      </label>
+      <input
+        aria-invalid="false"
+        class="form-control"
+        id="confirmPassword"
+        name="confirmPassword"
+        type="password"
+        value=""
+      />
+    </div>
+    <button
+      class="w-100 btn btn-success"
+      name="submit"
+    >
+      Submit
+    </button>
+    <button
+      class="w-100 mt-2 btn btn-secondary"
+      type="button"
+    >
+      Cancel
+    </button>
+  </form>
+</DocumentFragment>
+`;
